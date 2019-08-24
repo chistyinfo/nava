@@ -14,7 +14,7 @@ class _BooksTabState extends State<BooksTab> {
   var _isLoading = true;
   var databox;
 
-  // This supermethod called to load listview in main page
+  /// This initState is called  _fetchData() method when the app start */
   @override
   void initState() {
     super.initState();
@@ -28,11 +28,10 @@ class _BooksTabState extends State<BooksTab> {
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      // Fetch data from url and keep it in 'map' variable then-
-      // the variable 'map' is assigned in 'boxJson'.
+      /// Fetch data from url and keep it in 'map' variable then-the variable 'map' is assigned in 'boxJson'.
 
       final map = json.decode(response.body);
-      //Here 'map['banks']' json header from server file
+      //Here 'map['banks']' is json header from server file "pigi_money"
       final boxJson = map["banks"];
 
       setState(() {
@@ -109,21 +108,22 @@ class _BooksTabState extends State<BooksTab> {
                     return SizedBox(
                         width: double.infinity,
 
-                       //Here wrap with 'Flatbutton' to push next activity
+                        /**
+                        * 'FlatButton' user to wrap the code to push next activity
+                        *! Without using 'FlatButton' you can't navigate to next activity
+                        */
                         child: new FlatButton(
                           padding: EdgeInsets.all(0.0),
 
-                          //Call the AudioList method to show list of Audios
+                          //*Call the AudioList method to show list of Audios
                           child: AudioList(box),
-                            //Click item to go 2nd Activity                     
-                          onPressed: () {                         
+                          //*Click item to go 2nd Activity
+                          onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-        
-                                        TubePlayer(databox[i])
-                                        ));
+                                        TubePlayer(databox[i])));
                           },
                         ));
                   },
@@ -151,8 +151,8 @@ class DetailPage extends StatelessWidget {
               width: 400,
               child: GridTile(
                 child: Container(
-                    color: Colors.white,
-                    ),
+                  color: Colors.white,
+                ),
                 footer: Container(
                   color: Colors.white70,
                   child: ListTile(
