@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nava/books_tab.dart' as books;
-import 'package:nava/audio_tab.dart' as audio;
+import 'package:nava/tabs/books_tab.dart' as books;
+import 'package:nava/tabs/audio_tab.dart' as audio;
+
 
 
 void main() {

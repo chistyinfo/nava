@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nava/tube_player.dart';
-import 'package:nava/audio_list.dart';
+import 'package:nava/pages/tube_player.dart';
+import 'package:nava/pages/audio_list.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -134,45 +134,45 @@ class _BooksTabState extends State<BooksTab> {
   }
 }
 
-class DetailPage extends StatelessWidget {
-  DetailPage(this.box);
-  final box;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.redAccent,
-          title: Text("Details Page"),
-        ),
-        body: ListView(
-          children: <Widget>[
-            Container(
-              height: 300,
-              width: 400,
-              child: GridTile(
-                child: Container(
-                  color: Colors.white,
-                ),
-                footer: Container(
-                  color: Colors.white70,
-                  child: ListTile(
-                    leading: Text(
-                      box["name"],
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16.0),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Divider(),
-            ListTile(
-              title: Text(box["details"]),
-            )
-          ],
-        ));
-  }
-}
+// class DetailPage extends StatelessWidget {
+//   DetailPage(this.box);
+//   final box;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         appBar: AppBar(
+//           backgroundColor: Colors.redAccent,
+//           title: Text("Details Page"),
+//         ),
+//         body: ListView(
+//           children: <Widget>[
+//             Container(
+//               height: 300,
+//               width: 400,
+//               child: GridTile(
+//                 child: Container(
+//                   color: Colors.white,
+//                 ),
+//                 footer: Container(
+//                   color: Colors.white70,
+//                   child: ListTile(
+//                     leading: Text(
+//                       box["name"],
+//                       style: TextStyle(
+//                           fontWeight: FontWeight.bold, fontSize: 16.0),
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             Divider(),
+//             ListTile(
+//               title: Text(box["details"]),
+//             )
+//           ],
+//         ));
+//   }
+// }
 
 // Addmob part 2. Inisilize of Addmob add
 // MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
