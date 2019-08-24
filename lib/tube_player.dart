@@ -3,18 +3,16 @@ import 'package:youtube_player/youtube_player.dart';
 
 
 class TubePlayer extends StatelessWidget {
-  final bank;
-  TubePlayer(this.bank);
-  String url ='';
- 
- 
+  final databox;
+  TubePlayer(this.databox);
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
        appBar: AppBar(
-          title: Text(bank['name']),
+          title: Text(databox['name']),
         ),
          body: SingleChildScrollView(
           child: Column(
@@ -22,14 +20,13 @@ class TubePlayer extends StatelessWidget {
             children: <Widget>[
               YoutubePlayer(
                 context: context,
-                source: (bank['URl']),
+                source: (databox['URl']),
                 quality: YoutubeQuality.HD,
-              ),
-            
-              
+              ), 
             ],
           ),
         ));
+
       
     
   }

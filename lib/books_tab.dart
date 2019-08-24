@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nava/tube_player.dart';
-import 'package:nava/video_call.dart';
+import 'package:nava/audio_list.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -12,7 +12,7 @@ class BooksTab extends StatefulWidget {
 class _BooksTabState extends State<BooksTab> {
   //variables
   var _isLoading = true;
-  var banks;
+  var databox;
 
   // This supermethod called to load listview in main page
   @override
@@ -28,14 +28,16 @@ class _BooksTabState extends State<BooksTab> {
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      ///Fetch data from url and keep it in map variable then
-      ///keep the specefic item in specefic varibles.
+      // Fetch data from url and keep it in 'map' variable then-
+      // the variable 'map' is assigned in 'boxJson'.
+
       final map = json.decode(response.body);
-      final banksJson = map["banks"];
+      //Here 'map['banks']' json header from server file
+      final boxJson = map["banks"];
 
       setState(() {
         _isLoading = false;
-        this.banks = banksJson;
+        this.databox = boxJson;
       });
     }
   }
@@ -101,28 +103,26 @@ class _BooksTabState extends State<BooksTab> {
               ? CircularProgressIndicator()
               : ListView.builder(
                   padding: const EdgeInsets.all(16.0),
-                  itemCount: this.banks != null ? this.banks.length : 0,
+                  itemCount: this.databox != null ? this.databox.length : 0,
                   itemBuilder: (context, i) {
-                    final bank = this.banks[i];
+                    final box = this.databox[i];
                     return SizedBox(
                         width: double.infinity,
 
-                        // height: double.infinity,
+                       //Here wrap with 'Flatbutton' to push next activity
                         child: new FlatButton(
                           padding: EdgeInsets.all(0.0),
 
-                          //call the VideoCall method
-                          child: VideoCall(bank),
-                          // child:TubePlayer(bank),
-                         
-                          onPressed: () {
-                            //To go 2nd Activity
+                          //Call the AudioList method to show list of Audios
+                          child: AudioList(box),
+                            //Click item to go 2nd Activity                     
+                          onPressed: () {                         
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        // DetailPage(banks[i])
-                                        TubePlayer(banks[i])
+        
+                                        TubePlayer(databox[i])
                                         ));
                           },
                         ));
@@ -135,8 +135,8 @@ class _BooksTabState extends State<BooksTab> {
 }
 
 class DetailPage extends StatelessWidget {
-  DetailPage(this.banks);
-  final banks;
+  DetailPage(this.box);
+  final box;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,7 +157,7 @@ class DetailPage extends StatelessWidget {
                   color: Colors.white70,
                   child: ListTile(
                     leading: Text(
-                      banks["name"],
+                      box["name"],
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16.0),
                     ),
@@ -167,7 +167,7 @@ class DetailPage extends StatelessWidget {
             ),
             Divider(),
             ListTile(
-              title: Text(banks["details"]),
+              title: Text(box["details"]),
             )
           ],
         ));
